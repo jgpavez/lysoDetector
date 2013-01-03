@@ -1,0 +1,17 @@
+#Lyso material Detector for Geant 4
+***********************************************************
+
+Build:
+
+Inside different folder:
+
+cmake -DGeant4_DIR=../geant4.9D.5-install/lib/Geant4-9.5.2 path/to/LysoDetector
+make
+
+Run:
+
+./lysoDetector
+
+Output:
+
+hist.root
