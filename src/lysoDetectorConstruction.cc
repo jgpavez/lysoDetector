@@ -115,7 +115,7 @@ G4VPhysicalVolume* lysoDetectorConstruction::Construct()
                 false,
                 checkOverlaps);
 
-
+// Set multiFunctionalDetector with energy deposit scorer
   G4MultiFunctionalDetector* absDetector
         = new G4MultiFunctionalDetector("Absorber");
   G4VPrimitiveScorer* primitive;
