@@ -5,6 +5,8 @@
 #include "G4UserRunAction.hh"
 #include "globals.hh"
 
+#include "lysoDetectorRunAction.hh"
+
 class G4Run;
 
 class lysoDetectorRunAction : public G4UserRunAction

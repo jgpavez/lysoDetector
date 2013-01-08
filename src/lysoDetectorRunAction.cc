@@ -2,7 +2,6 @@
 
 #include "lysoDetectorRunAction.hh"
 #include "lysoDetectorPrimaryGeneratorAction.hh"
-#include "lysoDetectorEventAction.hh"
 #include "lysoDetectorAnalysis.hh"
 #include "G4Run.hh"
 #include "G4RunManager.hh"
@@ -32,24 +31,20 @@ void lysoDetectorRunAction::BeginOfRunAction(const G4Run* aRun)
   G4RunManager::GetRunManager()->SetRandomNumberStore(false);
 
 
-  lysoDetectorEventAction::Instance()->Reset();
 
   G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
 
   G4String fileName = "hist";
   analysisManager->OpenFile(fileName);
   analysisManager->SetFirstHistoId(1);
-  analysisManager->CreateH1("1","Edep in absorber",500,0.,100.*MeV);
+  analysisManager->CreateH1("1","Energy Distribution",1000,1.5,4.5);
+  analysisManager->CreateH1("2","Photon Time Distribution",1000,-50,350); 
 }
 
 void lysoDetectorRunAction::EndOfRunAction(const G4Run* aRun)
 {
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
   G4int nofEvents = aRun->GetNumberOfEvent();
-  if (nofEvents == 0) return;
-
-  G4double energySum  = lysoDetectorEventAction::Instance()->GetEnergySum();
-
 
   const G4ParticleGun* particleGun
     = lysoDetectorPrimaryGeneratorAction::Instance()->GetParticleGun();

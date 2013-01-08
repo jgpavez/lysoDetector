@@ -71,7 +71,7 @@ void lysoDetectorPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   fParticleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(-1,0,0));
-  fParticleGun->SetParticleEnergy(50.*MeV);
+  fParticleGun->SetParticleEnergy(511.*keV);
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 

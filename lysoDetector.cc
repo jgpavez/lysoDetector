@@ -1,9 +1,10 @@
  
 
 #include "lysoDetectorConstruction.hh"
+#include "lysoDetectorPhysicsList.hh"
 #include "lysoDetectorPrimaryGeneratorAction.hh"
 #include "lysoDetectorRunAction.hh"
-#include "lysoDetectorEventAction.hh"
+#include "lysoDetectorSD.hh"
 
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
@@ -22,19 +23,25 @@
 int main(int argc, char **argv)
 {
 
-  CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
   G4RunManager *runManager = new G4RunManager;
   
-  runManager->SetUserInitialization(new lysoDetectorConstruction());
 
-  G4VModularPhysicsList* physicsList = new QGSP_BIC_EMY;
+
+
+  lysoDetectorPhysicsList *physicsList = new lysoDetectorPhysicsList();
   runManager->SetUserInitialization(physicsList);
+  
+  lysoDetectorRunAction *runAction = new lysoDetectorRunAction();
 
+
+
+//  runManager->SetUserAction(new lysoDetectorEventAction());
+
+  runManager->SetUserAction(runAction);
+
+
+  runManager->SetUserInitialization(new lysoDetectorConstruction(runAction));
   runManager->SetUserAction(new lysoDetectorPrimaryGeneratorAction());
-
-  runManager->SetUserAction(new lysoDetectorEventAction());
-
-  runManager->SetUserAction(new lysoDetectorRunAction());
 
   runManager->Initialize();
 
